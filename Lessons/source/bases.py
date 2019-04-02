@@ -1,4 +1,6 @@
 #!python
+import string
+
 '''
 A base is the max value (non-inclusive) of what the digit can go up to.
 
@@ -19,7 +21,7 @@ Example 107 base12 ===> 151 in base 10
 (12^ 2) * 1
 '''
 
-import string
+
 # Hint: Use these string constants to encode/decode hexadecimal digits and more
 # string.digits is '0123456789'
 # string.hexdigits is '0123456789abcdefABCDEF'
@@ -38,8 +40,8 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     base_10_value = 0
     # Unsure if I need to enumerate, enumeration would give me the right power to raise the digits to
-    for exponent, digit in reverse(digits):
-        elif exponent == 0:
+    for exponent, digit in enumerate(digits[::-1]):
+        if exponent == 0:
             base_10_value += digit_mapper[digit] # On the first index, we are just adding that pure value
         elif int(digit) == 0: # We want to continue the iteration if 0 is present, because its just a placeholder value
             continue
@@ -47,7 +49,6 @@ def decode(digits, base):
             base_10_value += (base ** exponent) * digit
 
     return base_10_value
-
 
 
 
@@ -115,4 +116,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+
+    print(decode('2', 3))
