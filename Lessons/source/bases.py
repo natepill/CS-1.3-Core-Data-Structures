@@ -1,4 +1,23 @@
 #!python
+'''
+A base is the max value (non-inclusive) of what the digit can go up to.
+
+I am going to zip a digits 0-9 and lowercase letters with numbers up to 36 to create a dictionary that will map
+'''
+nums_and_letters = '{}{}'.format(string.digits, string.ascii_lowercase) # [0-9a-z]
+up_to_36 = (list(range(0, 36))) #list of ints up to 36
+digit_mapper = dict(zip(nums_and_letters, up_to_36)) # maps digit to its decimal value up to 36
+'''
+Base 12:
+Example: 36 base12 ===> 42 in base 10
+(12^0) + 6
+(12^1) * 3
+
+Example 107 base12 ===> 151 in base 10
+(12^0) + 7
+(12^1) * 0 (I would have to make sure it adds nothing if given 0)
+(12^ 2) * 1
+'''
 
 import string
 # Hint: Use these string constants to encode/decode hexadecimal digits and more
@@ -9,14 +28,32 @@ import string
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
 # string.printable is digits + ascii_letters + punctuation + whitespace
 
+# NOTE: Accomodate both uppercase both lowercase when decoding/encoding. So I have to determine to use either depending on the input
+
 
 def decode(digits, base):
     """Decode given digits in given base to number in base 10.
     digits: str -- string representation of number (in given base)
     base: int -- base of given number
     return: int -- integer representation of number (in base 10)"""
+    base_10_value = 0
+    # Unsure if I need to enumerate, enumeration would give me the right power to raise the digits to
+    for exponent, digit in reverse(digits):
+        elif exponent == 0:
+            base_10_value += digit_mapper[digit] # On the first index, we are just adding that pure value
+        elif int(digit) == 0: # We want to continue the iteration if 0 is present, because its just a placeholder value
+            continue
+        else:
+            base_10_value += (base ** exponent) * digit
+
+    return base_10_value
+
+
+
+
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
+
     # TODO: Decode digits from binary (base 2)
     # ...
     # TODO: Decode digits from hexadecimal (base 16)
