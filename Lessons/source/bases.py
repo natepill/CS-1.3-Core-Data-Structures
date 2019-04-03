@@ -10,7 +10,7 @@ I am going to zip a digits 0-9 and lowercase letters with numbers up to 36 to cr
 nums_and_letters = '{}{}'.format(string.digits, string.ascii_lowercase) # [0-9a-z]
 up_to_36 = (list(range(0, 36))) #list of ints up to 36
 digit_mapper = dict(zip(nums_and_letters, up_to_36)) # maps digit to its decimal value up to 36
-
+inv_digit_mapper = {v: k for k, v in digit_mapper.items()}
 '''
 Base 12:
 Example: 36 base12 ===> 42 in base 10
@@ -79,7 +79,6 @@ def encode(number, base):
     assert number >= 0, 'number is negative: {}'.format(number)
 
 
-
     highest_power = math.floor(math.log(number, base))
     number_string = ''
     difference = None
@@ -87,10 +86,18 @@ def encode(number, base):
 
     for exponent in reversed(range(0, highest_power+1)):
 
+        # NOTE:Could add case that catches if the number < base, if so, just add the str(digit_mapper[str(number)])
+
+
         if number == 0:
             for num in range(0, len(range(0, exponent))+1):
                 print(num)
                 number_string += '0'
+            break
+
+        # NOTE: Recently added, not sure if needed
+        elif number < base:
+            number_string += str(digit_mapper[str(number)])
             break
 
         elif (base ** exponent) < (number - (base ** exponent)):
@@ -112,7 +119,7 @@ def encode(number, base):
         elif (base ** exponent) > (number - (base ** exponent)):
 
             divisor = math.floor(number/(base ** exponent)) # How many times does (base ** exponent) go into current value of number?
-            number_string += str(divisor) #The divisor is the digit we're looking for when constructing the returned string
+            number_string += digit_mapper[str(divisor)] #The divisor is the digit we're looking for when constructing the returned string
             number = number - (base ** exponent) # Now that we have the divisor representing in one placeholder value, redo the process with whats left of number
             print("Number:",number)
 
@@ -198,4 +205,7 @@ if __name__ == '__main__':
 
     # print(decode('a', 16))
     # print(digit_mapper)
-    print(encode(16, 16))
+    # print(inv_digit_mapper)
+
+    # print(encode(16, 16))
+    print(encode(10, 16)) # 'a'
