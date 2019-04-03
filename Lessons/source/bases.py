@@ -36,6 +36,11 @@ Example 107 base12 ===> 151 in base 10
 
 
 def decode(digits, base):
+
+    # Handle up to base 36 [0-9a-z]
+    assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
+
+
     """Decode given digits in given base to number in base 10.
     digits: str -- string representation of number (in given base)
     base: int -- base of given number
@@ -56,17 +61,11 @@ def decode(digits, base):
 
 
 
-    # Handle up to base 36 [0-9a-z]
-    assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
 
-    # TODO: Decode digits from binary (base 2)
-    # ...
-    # TODO: Decode digits from hexadecimal (base 16)
-    # ...
-    # TODO: Decode digits from any base (2 up to 36)
-    # ...
 
 # TODO: Go through and replace all "number" variables to their value using dictionary
+# TODO: Need to check logic of if statements, don't think they're right
+# TODO: Maybe how I subtract from number is wrong?
 def encode(number, base):
 
     """Encode given number in base 10 to digits in given base.
@@ -81,53 +80,24 @@ def encode(number, base):
 
     highest_power = math.floor(math.log(number, base))
     number_string = ''
-    difference = None
+
+
+    print("Highest Power:", highest_power)
 
 
     for exponent in reversed(range(0, highest_power+1)):
 
-        # NOTE:Could add case that catches if the number < base, if so, just add the str(digit_mapper[str(number)])
+    	if number >= base ** exponent:
+    		divisor = math.floor(number / (base ** exponent))
+            # print('divisor:', divisor)
+    		number = number - (divisor * (base ** exponent))
+    		number_string += inv_digit_mapper[divisor]
 
-
-        if number == 0:
-            for num in range(0, len(range(0, exponent))+1):
-                print(num)
-                number_string += '0'
-            break
-
-        # NOTE: Recently added, not sure if needed
-        elif number < base:
-            number_string += str(digit_mapper[str(number)])
-            break
-
-        elif (base ** exponent) < (number - (base ** exponent)):
-            # print((base ** exponent) < (number - (base ** exponent)))
-            number_string += '0'
-            continue
-
-
-        elif (base ** exponent) == (number - (base ** exponent)): #This means that the current 'index' of the digit representation is = to the base raised to some power
-            divisor = math.floor(number/(base ** exponent)) # How many times does (base ** exponent) go into current value of number?
-            number_string += str(divisor) #The divisor is the digit we're looking for when constructing the returned string
-
-            # Sice base ** exponent is already the current value of number, we can fill the rest of the placeholders with 0's
-            for _ in range(0, len(range(0, exponent))):
-                number_string += '0'
-            break
-
-
-        elif (base ** exponent) > (number - (base ** exponent)):
-
-            divisor = math.floor(number/(base ** exponent)) # How many times does (base ** exponent) go into current value of number?
-            number_string += digit_mapper[str(divisor)] #The divisor is the digit we're looking for when constructing the returned string
-            number = number - (base ** exponent) # Now that we have the divisor representing in one placeholder value, redo the process with whats left of number
-            print("Number:",number)
+    	else:
+    		number_string += '0'
 
 
     return number_string
-
-
-
 
 
 
@@ -162,6 +132,7 @@ def encode(number, base):
 
 
 
+
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
     digits: str -- string representation of number (in base1)
@@ -171,14 +142,9 @@ def convert(digits, base1, base2):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
-    # TODO: Convert digits from base 2 to base 16 (and vice versa)
-    # ...
-    # TODO: Convert digits from base 2 to base 10 (and vice versa)
-    # ...
-    # TODO: Convert digits from base 10 to base 16 (and vice versa)
-    # ...
-    # TODO: Convert digits from any base to any base (2 up to 36)
-    # ...
+
+
+    return encode(decode(digits, base1), base2)
 
 
 def main():
@@ -198,7 +164,7 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
+    main()
     # print(decode('10', 2)) # 2
     # print(decode('9', 10)) # 9
     # print(decode('10', 10)) # 10
@@ -208,4 +174,5 @@ if __name__ == '__main__':
     # print(inv_digit_mapper)
 
     # print(encode(16, 16))
-    print(encode(10, 16)) # 'a'
+    # print(encode(10, 16))
+    # print(encode(45, 2))
