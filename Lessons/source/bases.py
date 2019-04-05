@@ -2,15 +2,12 @@
 import string
 import math
 
-'''
-A base is the max value (non-inclusive) of what the digit can go up to.
-
-I am going to zip a digits 0-9 and lowercase letters with numbers up to 36 to create a dictionary that will map
-'''
 nums_and_letters = '{}{}'.format(string.digits, string.ascii_lowercase) # [0-9a-z]
 up_to_36 = (list(range(0, 36))) #list of ints up to 36
 digit_mapper = dict(zip(nums_and_letters, up_to_36)) # maps digit to its decimal value up to 36
 inv_digit_mapper = {v: k for k, v in digit_mapper.items()}
+
+
 '''
 Base 12:
 Example: 36 base12 ===> 42 in base 10
@@ -22,17 +19,6 @@ Example 107 base12 ===> 151 in base 10
 (12^1) * 0 (I would have to make sure it adds nothing if given 0)
 (12^ 2) * 1
 '''
-
-
-# Hint: Use these string constants to encode/decode hexadecimal digits and more
-# string.digits is '0123456789'
-# string.hexdigits is '0123456789abcdefABCDEF'
-# string.ascii_lowercase is 'abcdefghijklmnopqrstuvwxyz'
-# string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-# string.ascii_letters is ascii_lowercase + ascii_uppercase
-# string.printable is digits + ascii_letters + punctuation + whitespace
-
-# NOTE: Accomodate both uppercase both lowercase when decoding/encoding. So I have to determine to use either depending on the input
 
 
 def decode(digits, base):
@@ -77,21 +63,19 @@ def encode(number, base):
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
 
-
     highest_power = math.floor(math.log(number, base))
     number_string = ''
 
-
     print("Highest Power:", highest_power)
 
-
+    # Enumerate over powers in reversed
     for exponent in reversed(range(0, highest_power+1)):
 
     	if number >= base ** exponent:
     		divisor = math.floor(number / (base ** exponent))
             # print('divisor:', divisor)
     		number = number - (divisor * (base ** exponent))
-    		number_string += inv_digit_mapper[divisor]
+    		number_string += inv_digit_mapper[divisor] # Convert value of divisor to its mapped value in baseX
 
     	else:
     		number_string += '0'
