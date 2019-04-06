@@ -19,6 +19,9 @@ def linear_search_iterative(array, item):
 def linear_search_recursive(array, item, index=0):
     # TODO: implement linear search recursively here
 
+    if index >= (len(array)):
+        return None
+        
     if array[index] != item:
         return linear_search_recursive(array, item, index + 1)
     else:
@@ -33,8 +36,8 @@ def binary_search(array, item):
     """return the index of item in sorted array or None if item is not found"""
     # implement binary_search_iterative and binary_search_recursive below, then
     # change this to call your implementation to verify it passes all tests
-    return binary_search_iterative(array, item)
-    # return binary_search_recursive(array, item)
+    # return binary_search_iterative(array, item)
+    return binary_search_recursive(array, item)
 
 
 def binary_search_iterative(array, item):
@@ -76,29 +79,34 @@ def binary_search_recursive(array, item, left=None, right=None):
     if left == None and right == None: # initialize variables on the first iteration
         left = 0
         right = (len(array) - 1)
-        print('left:', left)
-        print('right:', right)
+        # print('left:', left)
+        # print('right:', right)
         return binary_search_recursive(array, item, left, right)
 
     mid = round((left+right)/2) #Averaged index of left and right index values
 
     if array[mid] == item: # Found the item between left and right
         return mid
-    elif array[mid] == left or array[mid] == right:
+    elif mid == left or mid == right:
         return None
     elif array[mid] < item: # We're going Right!
         left = mid
+        # print("left:", left)
+        # print("mid:", mid)
         return binary_search_recursive(array, item, left, right)
     elif array[mid] > item: #We're going Left!
         right = mid
+        # print("right:", right)
+        # print("mid:", mid)
         return binary_search_recursive(array, item, left, right)
 
 
 
 arr = [1,2,3,4,5]
 names = ['Alex', 'Brian', 'Julia', 'Kojin', 'Nabil', 'Nick', 'Winnie']
-print(binary_search_iterative(arr, 2.3))
+
+# print(binary_search_iterative(arr, 2.3))
 
 # print(binary_search_recursive(arr, 1.22))
 # print(binary_search_recursive(arr, 1))
-# print(binary_search_recursive(names, 'Brian'))
+print(binary_search_recursive(names, 'Jeremy'))
