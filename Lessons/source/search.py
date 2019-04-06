@@ -54,6 +54,8 @@ def binary_search_iterative(array, item):
     while True:
         if array[mid] == item:
             return mid
+        elif array[mid] == left or array[mid] == right:
+            return None
         elif array[mid] < item: # We're going Right!
             left = mid
             # right stays the same
@@ -78,14 +80,12 @@ def binary_search_recursive(array, item, left=None, right=None):
         print('right:', right)
         return binary_search_recursive(array, item, left, right)
 
-
     mid = round((left+right)/2) #Averaged index of left and right index values
-
-    # print("mid: ", mid)
-
 
     if array[mid] == item: # Found the item between left and right
         return mid
+    elif array[mid] == left or array[mid] == right:
+        return None
     elif array[mid] < item: # We're going Right!
         left = mid
         return binary_search_recursive(array, item, left, right)
@@ -97,7 +97,8 @@ def binary_search_recursive(array, item, left=None, right=None):
 
 arr = [1,2,3,4,5]
 names = ['Alex', 'Brian', 'Julia', 'Kojin', 'Nabil', 'Nick', 'Winnie']
-# print(binary_search_iterative(arr, 2))
+print(binary_search_iterative(arr, 2.3))
 
-print(binary_search_recursive(arr, 4))
-# print(binary_search_recursive(names, 'Nick'))
+# print(binary_search_recursive(arr, 1.22))
+# print(binary_search_recursive(arr, 1))
+# print(binary_search_recursive(names, 'Brian'))
