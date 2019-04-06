@@ -40,27 +40,41 @@ def binary_search(array, item):
 def binary_search_iterative(array, item):
     # TODO: implement binary search iteratively here
 
-    index = (len(array) // 2)
-    temp_index = index
+    left = 0
+    right = (len(array) - 1)
+    mid = (len(array) // 2)
+
+    # If value is not in the range of the sorted array, return None
+    if item < array[left] or item > array[right]:
+        return None
+
+    #NOTE: This is not the optimal way to about this issue of catching infinite loop errors
+    iterations = 0 #if the number of iterations passes half the len of the arary, then return None
 
     while True:
-        if array[index] == item:
-            return item
-        elif array[index] <= item:
-            temp_index = index
-            index
-        else:
-            index = (index // 2)
+        if array[mid] == item:
+            return mid
+        elif array[mid] < item: # We're going Right!
+            left = mid
+            # right stays the same
+            mid = round((mid+right) / 2)
+
+        elif array[mid] > item: # We're going Left!
+            right = mid
+            mid = round((mid+left) / 2)
+
+
 
     # once implemented, change binary_search to call binary_search_iterative
     # to verify that your iterative implementation passes all tests
 
 
 def binary_search_recursive(array, item, left=None, right=None):
+
     # TODO: implement binary search recursively here
     pass
     # once implemented, change binary_search to call binary_search_recursive
     # to verify that your recursive implementation passes all tests
 
 arr = [1,2,3,4,5]
-print(binary_search_iterative(arr, 4))
+print(binary_search_iterative(arr, 3.5))
