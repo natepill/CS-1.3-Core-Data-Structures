@@ -28,18 +28,36 @@ def is_palindrome(text):
 def is_palindrome_iterative(text):
     # TODO: implement the is_palindrome function iteratively here
 
-    # Also works, but not iterative?
+    # Also works if text is cleaned
     # text = text.lower()
     # return text == text[::-1]
 
-    reversed_text = text[::-1]
-    for index, char in enumerate(text):
-        if char.lower() != reversed_text[index].lower():
-            return False
+
+    left = 0
+    right = (len(text) - 1)
+
+    while left != right:
+        if text[left].lower() == text[right].lower():
+            continue
         # Another check to see if the value is punctuation or whitespace, if so move on to next char, but compare to the same char on the other side (need to increment left/right index, but not left/right index)
         elif char in whitespace_or_punctuation:
-            pass
+            left += 1
+
+        else:
+            return False
+
     return True
+
+
+
+    # reversed_text = text[::-1]
+    # for index, char in enumerate(text):
+    #     if char.lower() != reversed_text[index].lower():
+    #         return False
+    #     # Another check to see if the value is punctuation or whitespace, if so move on to next char, but compare to the same char on the other side (need to increment left/right index, but not left/right index)
+    #     elif char in whitespace_or_punctuation:
+    #         pass
+    # return True
 
 
     # pass

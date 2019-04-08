@@ -17,16 +17,18 @@ def linear_search_iterative(array, item):
 
 
 def linear_search_recursive(array, item, index=0):
-    # TODO: implement linear search recursively here
 
+    # Check to make sure there isn't an index error
     if index >= (len(array)):
         return None
-        
+
+    # If the value of the array at index is NOT the item, then recall the function with an incremented by 1 index
     if array[index] != item:
         return linear_search_recursive(array, item, index + 1)
-    else:
+    else: #We found the value at index!
         return index
 
+    # The value wasn't found :(
     return None
     # once implemented, change linear_search to call linear_search_recursive
     # to verify that your recursive implementation passes all tests
@@ -102,11 +104,11 @@ def binary_search_recursive(array, item, left=None, right=None):
 
 
 
-arr = [1,2,3,4,5]
-names = ['Alex', 'Brian', 'Julia', 'Kojin', 'Nabil', 'Nick', 'Winnie']
+# arr = [1,2,3,4,5]
+# names = ['Alex', 'Brian', 'Julia', 'Kojin', 'Nabil', 'Nick', 'Winnie']
 
 # print(binary_search_iterative(arr, 2.3))
 
 # print(binary_search_recursive(arr, 1.22))
 # print(binary_search_recursive(arr, 1))
-print(binary_search_recursive(names, 'Jeremy'))
+# print(binary_search_recursive(names, 'Jeremy'))
