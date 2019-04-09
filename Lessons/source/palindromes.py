@@ -6,13 +6,14 @@ import string
 # string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
 
-#
 
 whitespace_or_punctuation = '{}{}'.format(' ',string.punctuation)
 
-def clean_text(text):
-    text = text.translate(str.maketrans('', '', string.punctuation))
-    return ''.join(text.split())
+
+# def clean_text(text):
+#     '''Shame! Shame! Shame!'''
+#     text = text.translate(str.maketrans('', '', string.punctuation))
+#     return ''.join(text.split())
 
 
 def is_palindrome(text):
@@ -21,8 +22,8 @@ def is_palindrome(text):
     # implement is_palindrome_iterative and is_palindrome_recursive below, then
     # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
-    # return is_palindrome_iterative(text)
-    return is_palindrome_recursive(text)
+    return is_palindrome_iterative(text)
+    # return is_palindrome_recursive(text)
 
 
 def is_palindrome_iterative(text):
@@ -39,9 +40,13 @@ def is_palindrome_iterative(text):
     while left != right:
         if text[left].lower() == text[right].lower():
             continue
+
         # Another check to see if the value is punctuation or whitespace, if so move on to next char, but compare to the same char on the other side (need to increment left/right index, but not left/right index)
-        elif char in whitespace_or_punctuation:
+        elif text[left] in whitespace_or_punctuation:
             left += 1
+
+        elif text[right] in whitespace_or_punctuation:
+            right -= 1
 
         else:
             return False
@@ -112,6 +117,6 @@ if __name__ == '__main__':
     # print(is_palindrome('taco cat'))
     # print(is_palindrome('Taco Cat'))
     # print(is_palindrome('no, on!'))
-    print(clean_text('  No, On!'))
+    print(clean_text('  No, On!')) #True
 
-    print(whitespace_or_punctuation)
+    # print(whitespace_or_punctuation)

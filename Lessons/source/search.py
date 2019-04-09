@@ -89,17 +89,17 @@ def binary_search_recursive(array, item, left=None, right=None):
 
     if array[mid] == item: # Found the item between left and right
         return mid
-    elif mid == left or mid == right:
+
+    elif mid == left or mid == right: # Catches infinite loop error
         return None
+
     elif array[mid] < item: # We're going Right!
         left = mid
-        # print("left:", left)
-        # print("mid:", mid)
         return binary_search_recursive(array, item, left, right)
+        
     elif array[mid] > item: #We're going Left!
         right = mid
-        # print("right:", right)
-        # print("mid:", mid)
+
         return binary_search_recursive(array, item, left, right)
 
 
