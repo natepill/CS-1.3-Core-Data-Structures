@@ -6,6 +6,17 @@ def contains(text, pattern):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement contains here (iteratively and/or recursively)
 
+    # if the length of the pattern is the same as pattern_index_value, then the pattern has been found
+    pattern_index_value = 0
+
+    # Plan is to enumerate over the text to find the start of the pattern
+        # When the pattern start is found, look at next value in the string and compare to next value in the pattern
+
+    # There should be a way to save the index of where we are (index wise) when we are comparing text to pattern
+    for index, letter in enumerate(text):
+        if letter == pattern[0]:
+
+
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
