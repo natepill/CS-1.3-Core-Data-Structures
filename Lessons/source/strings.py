@@ -66,6 +66,11 @@ def find_all_indexes(text, pattern):
     # list of indexes that indicate the start of pattern
     pattern_starting_indexes = list()
 
+    if pattern == '':
+        for index in range(0, len(text)):
+            pattern_starting_indexes.append(index)
+        return pattern_starting_indexes
+
     for index, letter in enumerate(text):
         if letter == pattern[0]:
             # Compare the slice of text from the current index to the len of pattern
@@ -111,4 +116,6 @@ if __name__ == '__main__':
 
     # print(contains('banana', 'na'))
     print(find_index('abc',''))
+    print(find_all_indexes('abc',''))
+
     # print(len(''))

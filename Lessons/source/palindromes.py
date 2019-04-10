@@ -1,17 +1,14 @@
 #!python
 
 import string
-# Hint: Use these string constants to ignore capitalization and/or punctuation
-# string.ascii_lowercase is 'abcdefghijklmnopqrstuvwxyz'
-# string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-# string.ascii_letters is ascii_lowercase + ascii_uppercase
 
 
-whitespace_or_punctuation = '{}{}'.format(' ',string.punctuation)
+# whitespace_or_punctuation = set('{}{}'.format(' ',string.punctuation))
+whitespace_or_punctuation = set((' '+string.punctuation))
+print(whitespace_or_punctuation)
 
-
+# Shame!
 # def clean_text(text):
-#     '''Shame! Shame! Shame!'''
 #     text = text.translate(str.maketrans('', '', string.punctuation))
 #     return ''.join(text.split())
 
@@ -31,14 +28,16 @@ def is_palindrome_iterative(text):
     left = 0
     right = (len(text) - 1)
 
-    while left >= right: # Continue iterating until the indexes are the same
-        if text[left].lower() == text[right].lower():
+    while left < right: # Continue comparing left and right bounds until the indexes are the same
+
+        # Charactacters are the same!
+        if text[left].lower() == text[right].lower(): # lowercase the element to remove issues of case sensitivity
             print('Characters are the same {} = {}'.format(text[left], text[right]))
             left += 1
             right -= 1
-            continue
 
-        # Another check to see if the value is punctuation or whitespace, if so move on to next char, comparing to the same char on the other side
+
+        # Check to see if the value is punctuation or whitespace, if so move on to next char, comparing to the same char on the other side
         # (need to increment left/right index, but not right/left index)
         elif text[left] in whitespace_or_punctuation:
             print('Came across punctuation from left bound: {}'.format(text[left]))
@@ -58,7 +57,7 @@ def is_palindrome_iterative(text):
 
 
 def is_palindrome_recursive(text, left=None, right=None):
-
+    
     # First function call sets these values
     if left == None and right == None:
         left = 0
@@ -72,22 +71,22 @@ def is_palindrome_recursive(text, left=None, right=None):
     elif text[left].lower() == text[right].lower():
         left += 1
         right -= 1
-        return is_palindrome_recursive(text, left, right)
+        # return is_palindrome_recursive(text, left, right)
 
     # Character is in whitespace_or_punctuation from left bound
     elif text[left] in whitespace_or_punctuation:
         left += 1
-        return is_palindrome_recursive(text, left, right)
+        # return is_palindrome_recursive(text, left, right)
 
     # Character is in whitespace_or_punctuation from right bound
     elif text[right] in whitespace_or_punctuation:
         right -= 1
-        return is_palindrome_recursive(text, left, right)
 
     # Characters are not the same, not a palindrome :(
     else:
         return False
 
+    return is_palindrome_recursive(text, left, right)
 
 
 def main():
@@ -110,6 +109,7 @@ if __name__ == '__main__':
     # print(is_palindrome('taco cat'))
     # print(is_palindrome('Taco Cat'))
 
+    # print(is_palindrome('Bb'))
     print(is_palindrome('Bb'))
 
     # print(is_palindrome('racecar')) # True (Simple test)

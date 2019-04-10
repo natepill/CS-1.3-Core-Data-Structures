@@ -74,6 +74,7 @@ class StringsTest(unittest.TestCase):
         assert find_index('abcabcdabcde', 'abcd') == 3  # multiple occurrences, overlapping prefix
         assert find_index('abra cadabra', 'abra') == 0  # multiple occurrences
         assert find_index('abra cadabra', 'adab') == 6  # overlapping prefix
+
         # TODO: Write more test cases that check complex patterns or edge cases
         # You'll need a lot more than this to test your algorithm's robustness
         # ...
@@ -89,6 +90,8 @@ class StringsTest(unittest.TestCase):
         assert find_all_indexes('abc', 'abc') == [0]  # all strings contain themselves
         assert find_all_indexes('aaa', 'a') == [0, 1, 2]  # multiple occurrences
         assert find_all_indexes('aaa', 'aa') == [0, 1]  # overlapping pattern
+        assert find_all_indexes('abcde', 'sdw') == []
+
         # TODO: Write more positive test cases with assert equal list statements
         # ...
 
