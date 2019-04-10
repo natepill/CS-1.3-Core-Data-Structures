@@ -6,15 +6,9 @@ def contains(text, pattern):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement contains here (iteratively and/or recursively)
 
-
-
-
-
-
-
-
+    # NOTE: Old Psuedocode:
     # if the length of the pattern is the same as pattern_index_value, then the pattern has been found
-    pattern_index_value = 0
+    # pattern_index_value = 0
 
     # O(mn)
     # Plan is to enumerate over the text to find the start of the pattern
@@ -23,10 +17,14 @@ def contains(text, pattern):
     # There should be a way to save the index of where we are (index wise) when we are comparing text to pattern
     for index, letter in enumerate(text):
         if letter == pattern[0]:
-            # slice the text from current index to len(pattern)
-            # Compare the slice to the pattern
-                # If comparion is not the same, then continue the iteration
+            # Compare the slice of text from the current index to the len of pattern
+            if pattern == text[index: (index + len(pattern))]:
+                return True # pattern == slice
 
+            # If comparion is not the same, then continue the iteration
+
+    # Pattern was not found during the entire iteration
+    return False
 
 
 
@@ -78,3 +76,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+    print(contains('banana', 'na'))
