@@ -22,84 +22,72 @@ def is_palindrome(text):
     # implement is_palindrome_iterative and is_palindrome_recursive below, then
     # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
-    return is_palindrome_iterative(text)
-    # return is_palindrome_recursive(text)
+    # return is_palindrome_iterative(text)
+    return is_palindrome_recursive(text)
 
 
 def is_palindrome_iterative(text):
-    # TODO: implement the is_palindrome function iteratively here
-
-    # Also works if text is cleaned
-    # text = text.lower()
-    # return text == text[::-1]
-
 
     left = 0
     right = (len(text) - 1)
 
-    while left != right:
+    while left >= right: # Continue iterating until the indexes are the same
         if text[left].lower() == text[right].lower():
             print('Characters are the same {} = {}'.format(text[left], text[right]))
             left += 1
             right -= 1
             continue
 
-        # Another check to see if the value is punctuation or whitespace, if so move on to next char, but compare to the same char on the other side (need to increment left/right index, but not left/right index)
+        # Another check to see if the value is punctuation or whitespace, if so move on to next char, comparing to the same char on the other side
+        # (need to increment left/right index, but not right/left index)
         elif text[left] in whitespace_or_punctuation:
             print('Came across punctuation from left bound: {}'.format(text[left]))
             left += 1
 
+        # Came across whitespace_or_punctuation from right bound
         elif text[right] in whitespace_or_punctuation:
             print('Came across punctuation from right bound: {}'.format(text[right]))
             right -= 1
 
-        else:
+        else: #Character comparision was NOT a match, hence not a palindrome
             return False
 
+    # Indexes left and right were the same, hence text is a palindrome
     return True
 
 
 
-    # reversed_text = text[::-1]
-    # for index, char in enumerate(text):
-    #     if char.lower() != reversed_text[index].lower():
-    #         return False
-    #     # Another check to see if the value is punctuation or whitespace, if so move on to next char, but compare to the same char on the other side (need to increment left/right index, but not left/right index)
-    #     elif char in whitespace_or_punctuation:
-    #         pass
-    # return True
-
-
-    # pass
-    # once implemented, change is_palindrome to call is_palindrome_iterative
-    # to verify that your iterative implementation passes all tests
-
-
 def is_palindrome_recursive(text, left=None, right=None):
 
-    # check from index starting left and coming from right
-    # stop when left and right == each other, if they do its a palindrome
-    # stop when value at left index does not == value at right index
-
-
+    # First function call sets these values
     if left == None and right == None:
         left = 0
         right = (len(text) - 1)
 
-    if left == right:
+    # Left index has surpassed the right index, palindrome found! :)
+    if left >= right:
         return True
+
+    # Compare characters, if same, then return call to look at the next character from the respective bounds
     elif text[left].lower() == text[right].lower():
         left += 1
         right -= 1
         return is_palindrome_recursive(text, left, right)
+
+    # Character is in whitespace_or_punctuation from left bound
+    elif text[left] in whitespace_or_punctuation:
+        left += 1
+        return is_palindrome_recursive(text, left, right)
+
+    # Character is in whitespace_or_punctuation from right bound
+    elif text[right] in whitespace_or_punctuation:
+        right -= 1
+        return is_palindrome_recursive(text, left, right)
+
+    # Characters are not the same, not a palindrome :(
     else:
         return False
 
-
-    # TODO: implement the is_palindrome function recursively here
-    # pass
-    # once implemented, change is_palindrome to call is_palindrome_recursive
-    # to verify that your iterative implementation passes all tests
 
 
 def main():
@@ -121,9 +109,10 @@ if __name__ == '__main__':
     # print(is_palindrome('  No, On!'))
     # print(is_palindrome('taco cat'))
     # print(is_palindrome('Taco Cat'))
-    # print(clean_text('  No, On!'))
 
-    print(is_palindrome('racecar')) # True (Simple test)
+    print(is_palindrome('Bb'))
+
+    # print(is_palindrome('racecar')) # True (Simple test)
     # print(is_palindrome('no, on!')) #True (Complex test)
 
     # print(whitespace_or_punctuation)
