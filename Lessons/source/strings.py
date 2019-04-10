@@ -16,13 +16,14 @@ def contains(text, pattern):
 
     # There should be a way to save the index of where we are (index wise) when we are comparing text to pattern
     for index, letter in enumerate(text):
-        if letter == pattern[0]:
+        try:
+            if letter == pattern[0]:
             # Compare the slice of text from the current index to the len of pattern
-            if pattern == text[index: (index + len(pattern))]:
-                return True # pattern == slice
-
-            # If comparion is not the same, then continue the iteration
-
+                if pattern == text[index: (index + len(pattern))]:
+                    return True # pattern == slice
+                # If comparion is not the same, then continue the iteration
+        except:
+            return True
     # Pattern was not found during the entire iteration
     return False
 
@@ -35,14 +36,45 @@ def find_index(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_index here (iteratively and/or recursively)
+    # O(n) solution
+    # enumerate over
 
+
+    for index, letter in enumerate(text):
+        try:
+            if letter == pattern[0]:
+            # Compare the slice of text from the current index to the len of pattern
+                if pattern == text[index: (index + len(pattern))]:
+                    return index # pattern == slice
+                # If comparion is not the same, then continue the iteration
+        except:
+            return 0
+    # Pattern was not found during the entire iteration
+    return None
+
+    # for index, letter in enumerate(text):
+    #     if letter == pattern[0]:
+    #         return index
+    # return False
 
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_all_indexes here (iteratively and/or recursively)
+
+    # list of indexes that indicate the start of pattern
+    pattern_starting_indexes = list()
+
+    for index, letter in enumerate(text):
+        if letter == pattern[0]:
+            # Compare the slice of text from the current index to the len of pattern
+            if pattern == text[index: (index + len(pattern))]:
+                pattern_starting_indexes.append(index) # pattern == slice
+            # If comparion is not the same, then continue the iteration
+
+    # Pattern was not found during the entire iteration
+    return pattern_starting_indexes
 
 
 def test_string_algorithms(text, pattern):
@@ -75,6 +107,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
 
-    print(contains('banana', 'na'))
+    # print(contains('banana', 'na'))
+    print(find_index('abc',''))
+    # print(len(''))
