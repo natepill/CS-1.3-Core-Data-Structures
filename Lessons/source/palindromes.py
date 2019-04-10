@@ -39,13 +39,18 @@ def is_palindrome_iterative(text):
 
     while left != right:
         if text[left].lower() == text[right].lower():
+            print('Characters are the same {} = {}'.format(text[left], text[right]))
+            left += 1
+            right -= 1
             continue
 
         # Another check to see if the value is punctuation or whitespace, if so move on to next char, but compare to the same char on the other side (need to increment left/right index, but not left/right index)
         elif text[left] in whitespace_or_punctuation:
+            print('Came across punctuation from left bound: {}'.format(text[left]))
             left += 1
 
         elif text[right] in whitespace_or_punctuation:
+            print('Came across punctuation from right bound: {}'.format(text[right]))
             right -= 1
 
         else:
@@ -116,7 +121,9 @@ if __name__ == '__main__':
     # print(is_palindrome('  No, On!'))
     # print(is_palindrome('taco cat'))
     # print(is_palindrome('Taco Cat'))
-    # print(is_palindrome('no, on!'))
-    print(clean_text('  No, On!')) #True
+    # print(clean_text('  No, On!'))
+
+    print(is_palindrome('racecar')) # True (Simple test)
+    # print(is_palindrome('no, on!')) #True (Complex test)
 
     # print(whitespace_or_punctuation)
