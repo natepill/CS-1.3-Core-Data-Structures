@@ -73,12 +73,27 @@ class LinkedList(object):
     def get_at_index(self, index):
         """Return the item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(1) If the index is early in the range of the LL
+        Worst case running time: O(n) If the index is towards the end of the LL"""
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
-        # TODO: Find the node at the given index and return its data
+
+        # Starting index in our LL
+        curr_index = 0
+
+        node = self.head
+
+        # Traverse the LL until the curr_index is at index, then return item in that node
+        while node is not None:
+            if curr_index == index:
+                return node.data
+
+            curr_index += 1
+            node = node.next
+
+
+
 
     def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or
@@ -89,6 +104,30 @@ class LinkedList(object):
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node before the given index and insert item after it
+
+
+
+        curr_node = self.head # Starting point of LL
+        prev_node = None # Previous node in LL
+
+        new_node = Node(item) # New node to insert at index
+        curr_index = 0
+
+        # Traverse entire LL
+        while node is not None:
+
+            # At the point of insertion in our LL
+            if curr_index == index:
+                new_node.next = curr_node # Set next pointer for our new node towards the current node
+                prev_node.next = new_node # The previous node's next pointer should point towards the new node
+                self.size += 1
+
+            # Arranging pointers for Linked List "iteration"
+            prev_node = curr_node
+            curr_node = curr_node.next
+            curr_index += 1
+
+
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.

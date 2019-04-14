@@ -39,7 +39,6 @@ def find_index(text, pattern):
     # O(n) solution
     # enumerate over
 
-
     for index, letter in enumerate(text):
         try:
             if letter == pattern[0]:

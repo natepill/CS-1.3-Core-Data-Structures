@@ -4,7 +4,7 @@ import string
 
 
 # whitespace_or_punctuation = set('{}{}'.format(' ',string.punctuation))
-whitespace_or_punctuation = set((' '+string.punctuation))
+whitespace_or_punctuation = frozenset((' '+string.punctuation))
 print(whitespace_or_punctuation)
 
 # Shame!
@@ -36,7 +36,6 @@ def is_palindrome_iterative(text):
             left += 1
             right -= 1
 
-
         # Check to see if the value is punctuation or whitespace, if so move on to next char, comparing to the same char on the other side
         # (need to increment left/right index, but not right/left index)
         elif text[left] in whitespace_or_punctuation:
@@ -57,7 +56,7 @@ def is_palindrome_iterative(text):
 
 
 def is_palindrome_recursive(text, left=None, right=None):
-    
+
     # First function call sets these values
     if left == None and right == None:
         left = 0
