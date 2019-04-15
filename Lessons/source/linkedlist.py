@@ -95,8 +95,6 @@ class LinkedList(object):
             node = node.next
 
 
-
-
     def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size.
@@ -105,31 +103,54 @@ class LinkedList(object):
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
+
+
         # TODO: Find the node before the given index and insert item after it
+
+        new_node = Node(item) # New node to insert at index
+        curr_index = 0 # Starting index for traversal
+
+        if self.size == 0:
+            self.head = new_node
+            self.tail = new_node
+            self.size += 1
+            return
 
 
         curr_node = self.head # Starting point of LL
         prev_node = None # Previous node in LL
 
-        new_node = Node(item) # New node to insert at index
-        curr_index = 0
 
-        #TODO: May need a serpate if check for 0th index
+        if index == 0:
+            new_node.next = curr_node.next
+            self.head = new_node
+            self.size += 1
+            return
+
+        if index == self.size:
+            self.tail.next = new_node
+            new_node.next = None
+            self.tail = new_node
+            self.size += 1
+            return
 
         # Traverse entire LL
-        while node is not None:
+        while curr_node is not None:
 
             # At the point of insertion in our LL
             if curr_index == index:
                 new_node.next = curr_node # Set next pointer for our new node towards the current node
                 prev_node.next = new_node # The previous node's next pointer should point towards the new node
-                self.size += 1
+                break
 
-            # Arranging pointers for Linked List "iteration"
+            # Arranging pointers for traversal
             prev_node = curr_node
             curr_node = curr_node.next
             curr_index += 1
 
+            # End while loop
+
+        self.size += 1
 
 
     def append(self, item):
@@ -189,23 +210,23 @@ class LinkedList(object):
         Best case running time: ??? under what conditions? [TODO]
         Worst case running time: ??? under what conditions? [TODO]"""
 
-
-        found = True
+        found = False
         curr_node = self.head
 
         # raise ValueError('Item not found: {}'.format(item))
 
         # Traverse LL until old item is found, if not found, raise value error
-        while not found:
+        while not found and curr_node is not None:
 
             if curr_node.data == old_item:
                 curr_node.data = new_item
                 found = True
 
-            curr_node = curr_node.next # Move on to check next node
+            else:
+                curr_node = curr_node.next # Move on to check next node
 
-            if curr_node is None:
-                raise ValueError('Item not found: {}'.format(old_item))
+        if found is False:
+            raise ValueError('Item not found: {}'.format(old_item))
 
 
         # TODO: Find the node containing the given old_item and replace its
