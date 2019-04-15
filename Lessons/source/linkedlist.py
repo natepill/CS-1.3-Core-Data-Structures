@@ -86,6 +86,8 @@ class LinkedList(object):
 
         # Traverse the LL until the curr_index is at index, then return item in that node
         while node is not None:
+
+
             if curr_index == index:
                 return node.data
 
@@ -106,12 +108,13 @@ class LinkedList(object):
         # TODO: Find the node before the given index and insert item after it
 
 
-
         curr_node = self.head # Starting point of LL
         prev_node = None # Previous node in LL
 
         new_node = Node(item) # New node to insert at index
         curr_index = 0
+
+        #TODO: May need a serpate if check for 0th index
 
         # Traverse entire LL
         while node is not None:
@@ -143,6 +146,7 @@ class LinkedList(object):
             self.tail.next = new_node
         # Update tail to new node regardless
         self.tail = new_node
+        self.size += 1
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
@@ -158,6 +162,8 @@ class LinkedList(object):
             new_node.next = self.head
         # Update head to new node regardless
         self.head = new_node
+
+        self.size += 1
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -182,9 +188,28 @@ class LinkedList(object):
         using the same node, or raise ValueError if old_item is not found.
         Best case running time: ??? under what conditions? [TODO]
         Worst case running time: ??? under what conditions? [TODO]"""
+
+
+        found = True
+        curr_node = self.head
+
+        # raise ValueError('Item not found: {}'.format(item))
+
+        # Traverse LL until old item is found, if not found, raise value error
+        while not found:
+
+            if curr_node.data == old_item:
+                curr_node.data = new_item
+                found = True
+
+            curr_node = curr_node.next # Move on to check next node
+
+            if curr_node is None:
+                raise ValueError('Item not found: {}'.format(old_item))
+
+
         # TODO: Find the node containing the given old_item and replace its
         # data with new_item, without creating a new node object
-        pass
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -200,7 +225,7 @@ class LinkedList(object):
         while not found and node is not None:
             # Check if the node's data matches the given item
             if node.data == item:
-                # We found data matching the given item, so update found flag
+                # We found data matching the given item, so up`date found flag
                 found = True
             else:
                 # Skip to the next node
@@ -228,6 +253,9 @@ class LinkedList(object):
                     previous.next = None
                 # Update tail to the previous node regardless
                 self.tail = previous
+
+            self.size -= 1 # Node was found and deleted, update LL size
+
         else:
             # Otherwise raise an error to tell the user that delete has failed
             raise ValueError('Item not found: {}'.format(item))
