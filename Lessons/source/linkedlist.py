@@ -181,7 +181,7 @@ class LinkedList(object):
             new_node.next = self.head
         # Update head to new node regardless
         self.head = new_node
-
+        
         self.size += 1
 
     def find(self, quality):
