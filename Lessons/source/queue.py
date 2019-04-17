@@ -29,23 +29,31 @@ class LinkedQueue(object):
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) """
         self.list.append(item)
         # TODO: Insert given item
 
     def front(self):
         """Return the item at the front of this queue without removing it,
         or None if this queue is empty."""
-        return self.list.head
+        if self.list.is_empty():
+            return None
+        return self.list.head.data
         # TODO: Return front item, if any
 
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
         Running time: O(???) – Why? [TODO]"""
-        dequeued_value = self.list.head
+
+        if self.list.is_empty():
+            raise ValueError("List Empty")
+
+        dequeued_value = self.list.head.data
         self.list.delete(dequeued_value)
+
         return dequeued_value
+        
         # TODO: Remove and return front item, if any
 
 
@@ -71,22 +79,29 @@ class ArrayQueue(object):
 
     def length(self):
         """Return the number of items in this queue."""
+        return len(self.list)
         # TODO: Count number of items
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: On – We have to append to last index + 1"""
+        self.list.append(item)
         # TODO: Insert given item
 
     def front(self):
         """Return the item at the front of this queue without removing it,
         or None if this queue is empty."""
+        if not is_empty():
+            return self.list[0]
+
         # TODO: Return front item, if any
 
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) – We know the index"""
+        return self.list.pop(0)
+
         # TODO: Remove and return front item, if any
 
 
