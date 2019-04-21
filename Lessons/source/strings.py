@@ -6,7 +6,8 @@ def contains(text, pattern):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement contains here (iteratively and/or recursively)
 
-
+    # Time Complexity: O(n*m)
+    # Space Complexity: O(1)
 
 
     ''' Old code that works is commented out'''
@@ -36,12 +37,16 @@ def find_index(text, pattern):
     or None if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_index here (iteratively and/or recursively)
-    # O(n) solution
-    # enumerate over
+
+
+    # Time Complexity: O(n*m)
+    # Space Complexity: O(1)
+
 
 
     ''' Old code that works is commented out'''
+    # O(nm) solution, n = len of text, m len of pattern
+
     # for index, letter in enumerate(text):
     #     try:
     #         if letter == pattern[0]:
@@ -69,6 +74,11 @@ def find_all_indexes(text, pattern):
     or an empty list if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
+
+    # Time Complexity: O(n*m)
+    # Space Complexity: O(1)
+
+
 
     # list of indexes that indicate the start of pattern
     pattern_starting_indexes = list()
