@@ -29,7 +29,7 @@ class LinkedQueue(object):
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue.
-        Running time: O(1) """
+        Running time: O(1) most of time """
         self.list.append(item)
         # TODO: Insert given item
 
@@ -44,7 +44,7 @@ class LinkedQueue(object):
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) – make self.head.next = self.head """
 
         if self.list.is_empty():
             raise ValueError("List Empty")
@@ -53,7 +53,7 @@ class LinkedQueue(object):
         self.list.delete(dequeued_value)
 
         return dequeued_value
-        
+
         # TODO: Remove and return front item, if any
 
 
@@ -84,7 +84,7 @@ class ArrayQueue(object):
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue.
-        Running time: On – We have to append to last index + 1"""
+        Running time: O1 – Append in an dynamic array is constant time operation most of the time"""
         self.list.append(item)
         # TODO: Insert given item
 
@@ -99,7 +99,7 @@ class ArrayQueue(object):
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
-        Running time: O(1) – We know the index"""
+        Running time: O(n) – Array reallocate"""
         return self.list.pop(0)
 
         # TODO: Remove and return front item, if any

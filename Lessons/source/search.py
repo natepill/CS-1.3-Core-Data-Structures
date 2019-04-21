@@ -48,19 +48,20 @@ def binary_search_iterative(array, item):
     left = 0
     right = (len(array) - 1)
     mid = (len(array) // 2)
+    found = False
 
     # If value is not in the range of the sorted array, return None
     if item < array[left] or item > array[right]:
         return None
 
-    #NOTE: This is not the optimal way to about this issue of catching infinite loop errors
-    iterations = 0 #if the number of iterations passes half the len of the arary, then return None
+    while not found:
 
-    while True:
         if array[mid] == item:
             return mid
+
         elif array[mid] == left or array[mid] == right:
             return None
+
         elif array[mid] < item: # We're going Right!
             left = mid
             # right stays the same
@@ -96,19 +97,39 @@ def binary_search_recursive(array, item, left=None, right=None):
     elif array[mid] < item: # We're going Right!
         left = mid
         return binary_search_recursive(array, item, left, right)
-        
+
     elif array[mid] > item: #We're going Left!
         right = mid
 
         return binary_search_recursive(array, item, left, right)
 
 
+if __name__ == '__main__':
+    arr = [1,2,3,4,5]
+    names = ['Winnie', 'Kojin', 'Brian', 'Nabil', 'Julia', 'Alex', 'Nick']
 
-# arr = [1,2,3,4,5]
+    print(linear_search(names, 'Winnie'))
+    print(linear_search(names, 'Kojin'))
+    print(linear_search(names, 'Brian'))
+    print(linear_search(names, 'Nabil'))
+    print(linear_search(names, 'Julia'))
+    print(linear_search(names, 'Alex'))
+    print(linear_search(names, 'Nick'))
+
+    print(linear_search(names, 'Jeremy') is None)
+    print(linear_search(names, 'nobody') is None)
+
+
+    print(binary_search(names, 'Alex'))
+    print(binary_search(names, 'Brian'))
+    print(binary_search(names, 'Julia'))
+    print(binary_search(names, 'Kojin'))
+    print(binary_search(names, 'Nabil'))
+    print(binary_search(names, 'Nick'))
+    print(binary_search(names, 'Winnie'))
+
+    print(binary_search(names, 'Jeremy'))
+    print(binary_search(names, 'nobody'))
+
+
 # names = ['Alex', 'Brian', 'Julia', 'Kojin', 'Nabil', 'Nick', 'Winnie']
-
-# print(binary_search_iterative(arr, 2.3))
-
-# print(binary_search_recursive(arr, 1.22))
-# print(binary_search_recursive(arr, 1))
-# print(binary_search_recursive(names, 'Jeremy'))

@@ -29,7 +29,7 @@ class LinkedStack(object):
 
     def push(self, item):
         """Insert the given item on the top of this stack.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O1 – known index"""
         self.list.prepend(item)
         # TODO: Push given item
 
@@ -86,7 +86,7 @@ class ArrayStack(object):
 
     def push(self, item):
         """Insert the given item on the top of this stack.
-        Running time: O1 – inserting at the start at known index [TODO]"""
+        Running time: On – inserting at the start at known index [TODO]"""
         self.list.insert(0, item)
 
 
