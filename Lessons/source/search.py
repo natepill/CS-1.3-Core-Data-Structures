@@ -38,43 +38,44 @@ def binary_search(array, item):
     """return the index of item in sorted array or None if item is not found"""
     # implement binary_search_iterative and binary_search_recursive below, then
     # change this to call your implementation to verify it passes all tests
-    # return binary_search_iterative(array, item)
-    return binary_search_recursive(array, item)
+
+    return binary_search_iterative(array, item)
+    # return binary_search_recursive(array, item)
 
 
 def binary_search_iterative(array, item):
-    # TODO: implement binary search iteratively here
 
+    # initialize some variables
     left = 0
-    right = (len(array) - 1)
-    mid = (len(array) // 2)
-    found = False
+    right = len(array)-1
+    mid = right // 2
 
-    # If value is not in the range of the sorted array, return None
-    if item < array[left] or item > array[right]:
-        return None
+    print("First left:", left)
+    print("First right:", right)
+    print("First mid:", mid)
 
-    while not found:
+
+    while left <= right:
 
         if array[mid] == item:
             return mid
 
-        elif array[mid] == left or array[mid] == right:
-            return None
+        elif array[mid] < item:
+            print('mid value {} is less than item: {}'.format(array[mid], item))
+            left = mid + 1
 
-        elif array[mid] < item: # We're going Right!
-            left = mid
-            # right stays the same
-            mid = round((mid+right) / 2)
-
-        elif array[mid] > item: # We're going Left!
-            right = mid
-            mid = round((mid+left) / 2)
+        else:
+            right = mid - 1
+            print('mid value {} is greater than item: {}'.format(array[mid], item))
 
 
+        mid = left + (right - left) // 2
 
-    # once implemented, change binary_search to call binary_search_iterative
-    # to verify that your iterative implementation passes all tests
+    # base case - item was not found, return None
+    return None
+
+
+
 
 
 def binary_search_recursive(array, item, left=None, right=None):
@@ -105,31 +106,31 @@ def binary_search_recursive(array, item, left=None, right=None):
 
 
 if __name__ == '__main__':
-    arr = [1,2,3,4,5]
+    # arr = [1,2,3,4,5]
     names = ['Winnie', 'Kojin', 'Brian', 'Nabil', 'Julia', 'Alex', 'Nick']
 
-    print(linear_search(names, 'Winnie'))
-    print(linear_search(names, 'Kojin'))
-    print(linear_search(names, 'Brian'))
-    print(linear_search(names, 'Nabil'))
-    print(linear_search(names, 'Julia'))
-    print(linear_search(names, 'Alex'))
-    print(linear_search(names, 'Nick'))
 
-    print(linear_search(names, 'Jeremy') is None)
-    print(linear_search(names, 'nobody') is None)
+    # print(linear_search(names, 'Winnie'))
+    # print(linear_search(names, 'Kojin'))
+    # print(linear_search(names, 'Brian'))
+    # print(linear_search(names, 'Nabil'))
+    # print(linear_search(names, 'Julia'))
+    # print(linear_search(names, 'Alex'))
+    # print(linear_search(names, 'Nick'))
+    #
+    # print(linear_search(names, 'Jeremy') is None)
+    # print(linear_search(names, 'nobody') is None)
 
 
     print(binary_search(names, 'Alex'))
-    print(binary_search(names, 'Brian'))
-    print(binary_search(names, 'Julia'))
-    print(binary_search(names, 'Kojin'))
-    print(binary_search(names, 'Nabil'))
-    print(binary_search(names, 'Nick'))
-    print(binary_search(names, 'Winnie'))
-
-    print(binary_search(names, 'Jeremy'))
-    print(binary_search(names, 'nobody'))
+    # print(binary_search(names, 'Brian'))
+    # print(binary_search(names, 'Julia'))
+    # print(binary_search(names, 'Kojin'))
+    # print(binary_search(names, 'Nabil'))
+    # print(binary_search(names, 'Nick'))
+    # print(binary_search(names, 'Winnie'))
+    # print(binary_search(names, 'Jeremy'))
+    # print(binary_search(names, 'nobody'))
 
 
 # names = ['Alex', 'Brian', 'Julia', 'Kojin', 'Nabil', 'Nick', 'Winnie']

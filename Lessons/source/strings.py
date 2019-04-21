@@ -6,26 +6,25 @@ def contains(text, pattern):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement contains here (iteratively and/or recursively)
 
-    # NOTE: Old Psuedocode:
-    # if the length of the pattern is the same as pattern_index_value, then the pattern has been found
-    # pattern_index_value = 0
 
-    # O(mn)
-    # Plan is to enumerate over the text to find the start of the pattern
-        # When the pattern start is found, look at next value in the string and compare to next value in the pattern
 
+
+    ''' Old code that works is commented out'''
     # There should be a way to save the index of where we are (index wise) when we are comparing text to pattern
-    for index, letter in enumerate(text):
-        try:
-            if letter == pattern[0]:
-            # Compare the slice of text from the current index to the len of pattern
-                if pattern == text[index: (index + len(pattern))]:
-                    return True # pattern == slice
-                # If comparion is not the same, then continue the iteration
-        except:
-            return True
-    # Pattern was not found during the entire iteration
-    return False
+    # for index, letter in enumerate(text):
+    #     try:
+    #         if letter == pattern[0]:
+    #         # Compare the slice of text from the current index to the len of pattern
+    #             if pattern == text[index: (index + len(pattern))]:
+    #                 return True # pattern == slice
+    #             # If comparion is not the same, then continue the iteration
+    #     except:
+    #         return True
+    # # Pattern was not found during the entire iteration
+    # return False
+
+
+    return len(find_all_indexes(text, pattern)) > 0
 
 
 
@@ -39,22 +38,26 @@ def find_index(text, pattern):
     # O(n) solution
     # enumerate over
 
-    for index, letter in enumerate(text):
-        try:
-            if letter == pattern[0]:
-            # Compare the slice of text from the current index to the len of pattern
-                if pattern == text[index: (index + len(pattern))]:
-                    return index # pattern == slice
-                # If comparion is not the same, then continue the iteration
-        except:
-            return 0
-    # Pattern was not found during the entire iteration
-    return None
 
+    ''' Old code that works is commented out'''
     # for index, letter in enumerate(text):
-    #     if letter == pattern[0]:
-    #         return index
-    # return False
+    #     try:
+    #         if letter == pattern[0]:
+    #         # Compare the slice of text from the current index to the len of pattern
+    #             if pattern == text[index: (index + len(pattern))]:
+    #                 return index # pattern == slice
+    #             # If comparion is not the same, then continue the iteration
+    #     except:
+    #         return 0
+    # # Pattern was not found during the entire iteration
+    # return None
+
+    try:
+        return find_all_indexes(text, pattern)[0]
+    except:
+        return None
+
+
 
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
