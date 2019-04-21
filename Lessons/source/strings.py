@@ -24,6 +24,8 @@ def contains(text, pattern):
     # return False
 
 
+
+    # Check to see if there are any starting patterns in the text
     return len(find_all_indexes(text, pattern)) > 0
 
 
@@ -52,6 +54,9 @@ def find_index(text, pattern):
     # # Pattern was not found during the entire iteration
     # return None
 
+
+
+    # Return the first found index of all indexes that start a pattern
     try:
         return find_all_indexes(text, pattern)[0]
     except:
