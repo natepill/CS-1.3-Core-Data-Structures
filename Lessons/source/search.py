@@ -39,6 +39,7 @@ def binary_search(array, item):
     # implement binary_search_iterative and binary_search_recursive below, then
     # change this to call your implementation to verify it passes all tests
 
+
     return binary_search_iterative(array, item)
     # return binary_search_recursive(array, item)
 
@@ -55,24 +56,24 @@ def binary_search_iterative(array, item):
     print("First mid:", mid)
 
 
+    # Iterations will continue until the left bound surpasses the right bound
     while left <= right:
 
-        if array[mid] == item:
+        if array[mid] == item: # Item found!
             return mid
 
-        elif array[mid] < item:
+        elif array[mid] < item: # Go right!
             print('mid value {} is less than item: {}'.format(array[mid], item))
             left = mid + 1
 
-        else:
+        else: # Go left!
             right = mid - 1
             print('mid value {} is greater than item: {}'.format(array[mid], item))
 
 
-        mid = left + (right - left) // 2
+        mid = left + (right - left) // 2 # Half the index!
 
-    # base case - item was not found, return None
-    return None
+    return None # Item not found!
 
 
 
@@ -122,7 +123,7 @@ if __name__ == '__main__':
     # print(linear_search(names, 'nobody') is None)
 
 
-    print(binary_search(names, 'Alex'))
+    # print(binary_search(names, 'Alex'))
     # print(binary_search(names, 'Brian'))
     # print(binary_search(names, 'Julia'))
     # print(binary_search(names, 'Kojin'))
