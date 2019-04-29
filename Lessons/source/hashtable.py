@@ -25,11 +25,10 @@ class HashTable(object):
 
     def load_factor(self):
         """Return the load factor, the ratio of number of entries to buckets.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time:O1"""
 
-        return self.size/len(self.buckets)
-        # TODO: Calculate load factor
-        # return ...
+        return self.size/len(self.buckets) # Must ressult in float
+
 
     def keys(self):
         """Return a list of all keys in this hash table.
@@ -57,7 +56,7 @@ class HashTable(object):
         # Collect all pairs of key-value entries in each of the buckets
         all_items = []
         for bucket in self.buckets:
-            all_items.extend(bucket.items())
+            all_items.extend(bucket.items()) # Returning an array of key,values from each bucket
         return all_items
 
     def length(self):
@@ -103,8 +102,9 @@ class HashTable(object):
         # Find the bucket the given key belongs in
         index = self._bucket_index(key)
         bucket = self.buckets[index]
-
         self.size += 1
+
+
         # Find the entry with the given key in that bucket, if one exists
         # Check if an entry with the given key exists in that bucket
         entry = bucket.find(lambda key_value: key_value[0] == key)
@@ -117,13 +117,14 @@ class HashTable(object):
         # Insert the new key-value entry into the bucket in either case
         bucket.append((key, value))
 
+
+
+        # Check if the load factor exceeds a threshold such as 0.75
+            # -If so, automatically resize to reduce the load factor
         if self.load_factor() > 0.75:
             self._resize()
 
-        # TODO: Check if the load factor exceeds a threshold such as 0.75
-        # ...
-        # TODO: If so, automatically resize to reduce the load factor
-        # ...
+
 
     def delete(self, key):
         """Delete the given key and its associated value, or raise KeyError.
@@ -145,8 +146,8 @@ class HashTable(object):
         """Resize this hash table's buckets and rehash all key-value entries.
         Should be called automatically when load factor exceeds a threshold
         such as 0.75 after an insertion (when set is called with a new key).
-        Best and worst case running time: ??? under what conditions? [TODO]
-        Best and worst case space usage: ??? what uses this memory? [TODO]"""
+        Best and worst case running time: On
+        Best and worst case space usage: On """
        # If unspecified, choose new size dynamically based on current size
         if new_size is None:
             new_size = len(self.buckets) * 2  # Double size
@@ -157,10 +158,11 @@ class HashTable(object):
 
         all_items = self.items() # Get all hashtable entries
 
-        self.__init__(new_size) # reinitialize new hashtable w/ new size
+        self.__init__(new_size) # reinitialize new hashtable w/ new size and resetting buckets
 
-        for item in all_items: # Fill the reinitialized hashtables w/ the old values
-            self.set(item[0], item[1])
+        for key,value in all_items: # Fill the reinitialized hashtables w/ the old values
+            # Unpack values in all_items to key, values (just more readability)
+            self.set(key, value)
 
         return self
 
