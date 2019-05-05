@@ -65,11 +65,33 @@ class Set(HashTable):
     def difference(self, other_set):
          """Return a new set that is the difference of this set and other_set"""
 
-         difference = self
+         difference = Set()
 
          for key in other_set:
 
-            if other_set.data.contains(key):
-                continue
+            # Key not found in self.data
+            if not self.data.contains(key):
+                difference.add(key)
 
-            else
+
+        return difference
+
+
+    def is_subset(self, other_set):
+        """
+        Return Bool that represents if this set is a subset of the other_set
+        O(n) since we need to iterate over all data in self
+
+        """
+
+        # To be a subset, the current set needs to have smaller length
+        if self.length() > other_set.length():
+            return False
+
+        # If smaller, check each element to ensure its in the larger set
+        for element in self.elements():
+            if not other_set.contains(element):
+                return False
+
+        # All elements in current set are in the larger set, therefore a subset
+        return True
